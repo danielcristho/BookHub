@@ -1,8 +1,8 @@
 <?php
 $server = "10.11.1.253";
-$user = "root";
-$password = "secret";
-$nama_database = "pweb";
+$user = "superking";
+$password = "MEZhUBHEqfMp";
+$nama_database = "library";
 
 $db = mysqli_connect($server, $user, $password, $nama_database);
 

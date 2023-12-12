@@ -1,0 +1,3 @@
+CREATE USER 'superking'@'%' IDENTIFIED BY 'MEZhUBHEqfMp';
+GRANT ALL PRIVILEGES ON library.* TO 'superking';
+FLUSH PRIVILEGES;
