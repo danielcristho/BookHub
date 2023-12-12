@@ -1,7 +1,7 @@
 <?php
+	session_start();
 	require "config.php";
 	require "header.php";
-	session_start();
 
 	if(empty($_SESSION['type']));
 	else if(strcmp($_SESSION['type'], "librarian") == 0)
@@ -9,11 +9,10 @@
 	else if(strcmp($_SESSION['type'], "member") == 0)
 		header("Location: member/home.php");
 ?>
-
 <html>
 	<head>
-		<title>BookHub</title>
-		<link rel="stylesheet" type="text/css" href="css/index_style.css" />
+	<title>BookHub</title>
+	<link rel="stylesheet" type="text/css" href="css/index_style.css" />
 	</head>
 	<body>
 		<div id="allTheThings">

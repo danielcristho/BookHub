@@ -1,5 +1,5 @@
 <?php
-$server = "172.23.0.2";
+$server = "10.11.1.253";
 $user = "root";
 $password = "secret";
 $nama_database = "pweb";
