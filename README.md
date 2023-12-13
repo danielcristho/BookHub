@@ -1,2 +1,5 @@
 # BookHub
-PWEB FP
+
+#### Tampilan
+
+![Home Page](assets/homepage.png)
