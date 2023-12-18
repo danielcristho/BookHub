@@ -8,8 +8,8 @@
 <html>
 	<head>
 		<title>Member Login</title>
-		<link rel="stylesheet" type="text/css" href="../css/global_styles.css">
-		<link rel="stylesheet" type="text/css" href="../css/form_styles.css">
+		<link rel="stylesheet" type="text/css" href="../css/global_style.css">
+		<link rel="stylesheet" type="text/css" href="../css/form_style.css">
 		<link rel="stylesheet" type="text/css" href="css/index_style.css">
 	</head>
 	<body>
