@@ -22,7 +22,7 @@ Library management system using Native PHP, MySQL & Docker.
 docker-compose -up -d --build
 ```
 
-type in browser: [http://10.11.1.252](http://10.11.1.252), login as **Librarian** with username
+type in browser: [http://10.11.1.252](http://10.11.1.252), login as **Librarian** with username **admin** password **passwordd23**.
 
 ### Tampilan
 

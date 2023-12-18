@@ -137,7 +137,7 @@ CREATE TABLE `librarian` (
 --
 
 INSERT INTO `librarian` (`id`, `username`, `password`) VALUES
-(1, 'genesis', '93c768d0152f72bc8d5e782c0b585acc35fb0442');
+(1, 'admin', '225da03b42675955d1b9088492b99f4aa4a23f2a');
 
 -- --------------------------------------------------------
 
