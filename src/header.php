@@ -7,7 +7,7 @@
 		<header>
 			<a href="./">
 				<div id="cd-logo">
-					<img src="img/logo.svg" alt="Logo" />
+					<img src="img/ic_logo.svg" alt="Logo" />
 					<p>BookHub</p>
 				</div>
 			</a>

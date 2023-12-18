@@ -1,7 +1,7 @@
 <?php
-	require "../config.php";
+	require "../db_connect.php";
 	require "verify_librarian.php";
-	// require "header_librarian.php";
+	require "header_librarian.php";
 ?>
 
 <html>

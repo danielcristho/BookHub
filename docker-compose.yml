@@ -20,6 +20,7 @@ services:
     volumes:
       - vol-mysql:/var/lib/mysql
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "no"
       MYSQL_ROOT_PASSWORD: "secret"

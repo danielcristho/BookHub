@@ -1,5 +1,5 @@
 <?php
-	require "../config.php";
+	require "../db_connect.php";
 	require "../message_display.php";
 	require "verify_librarian.php";
 	require "header_librarian.php";
@@ -8,7 +8,7 @@
 <html>
 	<head>
 		<title>Pending Book Requests</title>
-		<link rel="stylesheet" type="text/css" href="../css/global_style.css">
+		<link rel="stylesheet" type="text/css" href="../css/global_styles.css">
 		<link rel="stylesheet" type="text/css" href="../css/custom_checkbox_style.css">
 		<link rel="stylesheet" type="text/css" href="css/pending_book_requests_style.css">
 	</head>
@@ -55,9 +55,9 @@
 				echo "</div>";
 				echo "</form>";
 			}
-
+			
 			$header = 'From: <noreply@library.com>' . "\r\n";
-
+			
 			if(isset($_POST['l_grant']))
 			{
 				$requests = 0;
@@ -77,24 +77,24 @@
 						if(!$query->execute())
 							die(error_without_field("ERROR: Couldn\'t issue book"));
 						$requests++;
-
+						
 						$query = $con->prepare("SELECT email FROM member WHERE username = ?;");
 						$query->bind_param("s", $member);
 						$query->execute();
 						$to = mysqli_fetch_array($query->get_result())[0];
 						$subject = "Book successfully issued";
-
+						
 						$query = $con->prepare("SELECT title FROM book WHERE isbn = ?;");
 						$query->bind_param("s", $isbn);
 						$query->execute();
 						$title = mysqli_fetch_array($query->get_result())[0];
-
+						
 						$query = $con->prepare("SELECT due_date FROM book_issue_log WHERE member = ? AND book_isbn = ?;");
 						$query->bind_param("ss", $member, $isbn);
 						$query->execute();
 						$due_date = mysqli_fetch_array($query->get_result())[0];
 						$message = "The book '".$title."' with ISBN ".$isbn." has been issued to your account. The due date to return the book is ".$due_date.".";
-
+						
 						mail($to, $subject, $message, $header);
 					}
 				}
@@ -103,7 +103,7 @@
 				else
 					echo error_without_field("No request selected");
 			}
-
+			
 			if(isset($_POST['l_reject']))
 			{
 				$requests = 0;
@@ -113,31 +113,31 @@
 					{
 						$requests++;
 						$request_id =  $_POST['cb_'.$i];
-
+						
 						$query = $con->prepare("SELECT member, book_isbn FROM pending_book_requests WHERE request_id = ?;");
 						$query->bind_param("d", $request_id);
 						$query->execute();
 						$resultRow = mysqli_fetch_array($query->get_result());
 						$member = $resultRow[0];
 						$isbn = $resultRow[1];
-
+						
 						$query = $con->prepare("SELECT email FROM member WHERE username = ?;");
 						$query->bind_param("s", $member);
 						$query->execute();
 						$to = mysqli_fetch_array($query->get_result())[0];
 						$subject = "Book issue rejected";
-
+						
 						$query = $con->prepare("SELECT title FROM book WHERE isbn = ?;");
 						$query->bind_param("s", $isbn);
 						$query->execute();
 						$title = mysqli_fetch_array($query->get_result())[0];
 						$message = "Your request for issuing the book '".$title."' with ISBN ".$isbn." has been rejected. You can request the book again or visit a librarian for further information.";
-
+						
 						$query = $con->prepare("DELETE FROM pending_book_requests WHERE request_id = ?");
 						$query->bind_param("d", $request_id);
 						if(!$query->execute())
 							die(error_without_field("ERROR: Couldn\'t delete values"));
-
+						
 						mail($to, $subject, $message, $header);
 					}
 				}
@@ -145,4 +145,4 @@
 					echo success("Successfully deleted ".$requests." requests");
 				else
 					echo error_without_field("No request selected");
-}
+			}

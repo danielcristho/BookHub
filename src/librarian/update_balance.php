@@ -1,5 +1,5 @@
 <?php
-	require "../config.php";
+	require "../db_connect.php";
 	require "../message_display.php";
 	require "verify_librarian.php";
 	require "header_librarian.php";
@@ -8,30 +8,30 @@
 <html>
 	<head>
 		<title>Update balance</title>
-		<link rel="stylesheet" type="text/css" href="../css/global_style.css" />
-		<link rel="stylesheet" type="text/css" href="../css/form_style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/global_styles.css" />
+		<link rel="stylesheet" type="text/css" href="../css/form_styles.css" />
 		<link rel="stylesheet" href="css/update_balance_style.css">
 	</head>
 	<body>
 		<form class="cd-form" method="POST" action="#">
 			<legend>Enter the details</legend>
-
+			
 				<div class="error-message" id="error-message">
 					<p id="error"></p>
 				</div>
-
+				
 				<div class="icon">
 					<input class="m-user" type='text' name='m_user' id="m_user" placeholder="Member username" required />
 				</div>
-
+				
 				<div class="icon">
 					<input class="m-balance" type="number" name="m_balance" placeholder="Balance to add" required />
 				</div>
-
+				
 				<input type="submit" name="m_add" value="Add Balance" />
 		</form>
 	</body>
-
+	
 	<?php
 		if(isset($_POST['m_add']))
 		{

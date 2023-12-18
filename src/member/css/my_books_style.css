@@ -1,7 +1,7 @@
 /*----------Form styles----------*/
 .cd-form {
   width: 90%;
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 4em auto;
   font-size: 1.3rem;
   color: #94aab0;
@@ -20,6 +20,9 @@
   margin-bottom: 20px;
   font-size: 2rem;
   border-bottom: 1px solid #ecf0f1;
+}
+
+.cd-form legend {
   display: block;
   width: 100%;
   -webkit-appearance: none;
@@ -48,10 +51,6 @@
   appearance: none;
 }
 
-.no-touch .cd-form input[type="submit"]:hover {
-  background: #42a2e1;
-}
-
 .cd-form input[type="submit"]:focus {
   outline: none;
   background: #2b3e51;
@@ -65,7 +64,7 @@
   transform: scale(0.9);
 }
 
-.cd-form .error-message{
+.cd-form .error-message, .cd-form .success-message{
 	display: none;
 }
 

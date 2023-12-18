@@ -1,5 +1,5 @@
 <?php
-	require "../config.php";
+	require "../db_connect.php";
 	require "../message_display.php";
 	require "verify_librarian.php";
 	require "header_librarian.php";
@@ -8,9 +8,9 @@
 <html>
 	<head>
 		<title>Pending Registrations</title>
-		<link rel="stylesheet" type="text/css" href="../css/global_style.css">
+		<link rel="stylesheet" type="text/css" href="../css/global_styles.css">
 		<link rel="stylesheet" type="text/css" href="../css/custom_checkbox_style.css">
-		<link rel="stylesheet" type="text/css" href="css/pending_registration_style.css">
+		<link rel="stylesheet" type="text/css" href="css/pending_registrations_style.css">
 	</head>
 	<body>
 		<?php
@@ -58,9 +58,9 @@
 				echo "</div>";
 				echo "</form>";
 			}
-
+			
 			$header = 'From: <noreply@library.com>' . "\r\n";
-
+			
 			if(isset($_POST['l_confirm']))
 			{
 				$members = 0;
@@ -73,13 +73,13 @@
 						$query->bind_param("s", $username);
 						$query->execute();
 						$row = mysqli_fetch_array($query->get_result());
-
+						
 						$query = $con->prepare("INSERT INTO member(username, password, name, email, balance) VALUES(?, ?, ?, ?, ?);");
 						$query->bind_param("ssssd", $username, $row[1], $row[2], $row[3], $row[4]);
 						if(!$query->execute())
 							die(error_without_field("ERROR: Couldn\'t insert values"));
 						$members++;
-
+						
 						$to = $row[3];
 						$subject = "Library membership accepted";
 						$message = "Your membership has been accepted by the library. You can now issue books using your account.";
@@ -91,7 +91,7 @@
 				else
 					echo error_without_field("No registration selected");
 			}
-
+			
 			if(isset($_POST['l_delete']))
 			{
 				$requests = 0;
@@ -104,13 +104,13 @@
 						$query->bind_param("s", $username);
 						$query->execute();
 						$email = mysqli_fetch_array($query->get_result())[0];
-
+						
 						$query = $con->prepare("DELETE FROM pending_registrations WHERE username = ?;");
 						$query->bind_param("s", $username);
 						if(!$query->execute())
 							die(error_without_field("ERROR: Couldn\'t delete values"));
 						$requests++;
-
+						
 						$to = $email;
 						$subject = "Library membership rejected";
 						$message = "Your membership has been rejected by the library. Please contact a librarian for further information.";

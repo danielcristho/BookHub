@@ -1,5 +1,5 @@
 <?php
-	require "../config.php";
+	require "../db_connect.php";
 	require "../message_display.php";
 	require "verify_member.php";
 	require "header_member.php";
@@ -8,12 +8,12 @@
 <html>
 	<head>
 		<title>My books</title>
-		<link rel="stylesheet" type="text/css" href="../css/global_style.css">
+		<link rel="stylesheet" type="text/css" href="../css/global_styles.css">
 		<link rel="stylesheet" type="text/css" href="../css/custom_checkbox_style.css">
 		<link rel="stylesheet" type="text/css" href="css/my_books_style.css">
 	</head>
 	<body>
-
+	
 		<?php
 			$query = $con->prepare("SELECT book_isbn FROM book_issue_log WHERE member = ?;");
 			$query->bind_param("s", $_SESSION['username']);
@@ -71,7 +71,7 @@
 				echo "<input type='submit' name='b_return' value='Return selected books' />";
 				echo "</form>";
 			}
-
+			
 			if(isset($_POST['b_return']))
 			{
 				$books = 0;
@@ -82,17 +82,17 @@
 						$query->bind_param("ss", $_SESSION['username'], $_POST['cb_book'.$i]);
 						$query->execute();
 						$due_date = mysqli_fetch_array($query->get_result())[0];
-
+						
 						$query = $con->prepare("SELECT DATEDIFF(CURRENT_DATE, ?);");
 						$query->bind_param("s", $due_date);
 						$query->execute();
 						$days = (int)mysqli_fetch_array($query->get_result())[0];
-
+						
 						$query = $con->prepare("DELETE FROM book_issue_log WHERE member = ? AND book_isbn = ?;");
 						$query->bind_param("ss", $_SESSION['username'], $_POST['cb_book'.$i]);
 						if(!$query->execute())
 							die(error_without_field("ERROR: Couldn\'t return the books"));
-
+						
 						if($days > 0)
 						{
 							$penalty = 5*$days;
@@ -121,7 +121,7 @@
 					$query = $con->prepare("SELECT balance FROM member WHERE username = ?;");
 					$query->bind_param("s", $_SESSION['username']);
 					$query->execute();
-
+					
 					$balance = (int)mysqli_fetch_array($query->get_result())[0];
 					if($balance < 0)
 						header("Location: ../logout.php");
@@ -130,6 +130,6 @@
 					echo error_without_field("Please select a book to return");
 			}
 		?>
-
+		
 	</body>
 </html>

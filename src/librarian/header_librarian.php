@@ -7,13 +7,13 @@
 		<header>
 			<div id="cd-logo">
 				<a href="../">
-					<img src="img/logo.svg" alt="Logo" />
+					<img src="img/ic_logo.svg" alt="Logo" />
 					<p>BookHub</p>
 				</a>
 			</div>
 
 			<div class="dropdown">
-				<button class="dropbtn">
+			<button class="dropbtn">
 					<p id="librarian-name"><?php echo $_SESSION['username'] ?></p>
 				</button>
 				<div class="dropdown-content">
