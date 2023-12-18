@@ -4,9 +4,8 @@ $user = "superking";
 $password = "MEZhUBHEqfMp";
 $nama_database = "library";
 
-$db = mysqli_connect($server, $user, $password, $nama_database);
+$con = mysqli_connect($server, $user, $password, $nama_database);
 
-if( !$db ){
-    die("Gagal terhubung dengan database: " . mysqli_connect_error());
-}
+if(!$con)
+		die("ERROR: Couldn't connect to database");
 ?>
